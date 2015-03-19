@@ -313,6 +313,12 @@ func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPl
 			Name:       "ListEndpointsByPlatformApplication",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "NextToken",
+				OutputToken:     "NextToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -338,6 +344,12 @@ func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInp
 			Name:       "ListPlatformApplications",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "NextToken",
+				OutputToken:     "NextToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -363,6 +375,12 @@ func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) (req *aws.
 			Name:       "ListSubscriptions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "NextToken",
+				OutputToken:     "NextToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -388,6 +406,12 @@ func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInp
 			Name:       "ListSubscriptionsByTopic",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "NextToken",
+				OutputToken:     "NextToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -413,6 +437,12 @@ func (c *SNS) ListTopicsRequest(input *ListTopicsInput) (req *aws.Request, outpu
 			Name:       "ListTopics",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "NextToken",
+				OutputToken:     "NextToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 

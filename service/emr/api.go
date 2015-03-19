@@ -115,6 +115,12 @@ func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *aws.Re
 			Name:       "DescribeJobFlows",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -165,6 +171,12 @@ func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) (req
 			Name:       "ListBootstrapActions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -190,6 +202,12 @@ func (c *EMR) ListClustersRequest(input *ListClustersInput) (req *aws.Request, o
 			Name:       "ListClusters",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -215,6 +233,12 @@ func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) (req *aw
 			Name:       "ListInstanceGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -240,6 +264,12 @@ func (c *EMR) ListInstancesRequest(input *ListInstancesInput) (req *aws.Request,
 			Name:       "ListInstances",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -265,6 +295,12 @@ func (c *EMR) ListStepsRequest(input *ListStepsInput) (req *aws.Request, output 
 			Name:       "ListSteps",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 

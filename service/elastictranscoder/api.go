@@ -163,6 +163,12 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 			Name:       "ListJobsByPipeline",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2012-09-25/jobsByPipeline/{PipelineId}",
+			Paginator: &aws.Paginator{
+				InputToken:      "PageToken",
+				OutputToken:     "NextPageToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -188,6 +194,12 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 			Name:       "ListJobsByStatus",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2012-09-25/jobsByStatus/{Status}",
+			Paginator: &aws.Paginator{
+				InputToken:      "PageToken",
+				OutputToken:     "NextPageToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -213,6 +225,12 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req
 			Name:       "ListPipelines",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2012-09-25/pipelines",
+			Paginator: &aws.Paginator{
+				InputToken:      "PageToken",
+				OutputToken:     "NextPageToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -238,6 +256,12 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *aw
 			Name:       "ListPresets",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2012-09-25/presets",
+			Paginator: &aws.Paginator{
+				InputToken:      "PageToken",
+				OutputToken:     "NextPageToken",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 

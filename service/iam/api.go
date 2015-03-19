@@ -1190,6 +1190,12 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *G
 			Name:       "GetGroup",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1515,6 +1521,12 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) (req *aws.Reques
 			Name:       "ListAccessKeys",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1540,6 +1552,12 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) (req *aw
 			Name:       "ListAccountAliases",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1665,6 +1683,12 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) (req *aws.
 			Name:       "ListGroupPolicies",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1690,6 +1714,12 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, outpu
 			Name:       "ListGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1715,6 +1745,12 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) (req *aws.
 			Name:       "ListGroupsForUser",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1740,6 +1776,12 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) (req
 			Name:       "ListInstanceProfiles",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1765,6 +1807,12 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 			Name:       "ListInstanceProfilesForRole",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1790,6 +1838,12 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) (req *aws.Reques
 			Name:       "ListMFADevices",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1890,6 +1944,12 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) (req *aws.Re
 			Name:       "ListRolePolicies",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1915,6 +1975,12 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) (req *aws.Request, output 
 			Name:       "ListRoles",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1940,6 +2006,12 @@ func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) (req *aws.
 			Name:       "ListSAMLProviders",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1965,6 +2037,12 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 			Name:       "ListServerCertificates",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -1990,6 +2068,12 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 			Name:       "ListSigningCertificates",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -2015,6 +2099,12 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) (req *aws.Re
 			Name:       "ListUserPolicies",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -2040,6 +2130,12 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) (req *aws.Request, output 
 			Name:       "ListUsers",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 
@@ -2065,6 +2161,12 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) (r
 			Name:       "ListVirtualMFADevices",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "IsTruncated",
+			},
 		}
 	}
 

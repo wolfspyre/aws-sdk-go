@@ -16,6 +16,7 @@ type Operation struct {
 	HTTP          HTTPInfo
 	InputRef      ShapeRef `json:"input"`
 	OutputRef     ShapeRef `json:"output"`
+	Paginator     *Paginator
 }
 
 type HTTPInfo struct {
@@ -41,6 +42,12 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}Request(` +
 			Name:       "{{ .Name }}",
 			{{ if ne .HTTP.Method "" }}HTTPMethod: "{{ .HTTP.Method }}",
 			{{ end }}{{ if ne .HTTP.RequestURI "" }}HTTPPath:   "{{ .HTTP.RequestURI }}",
+			{{ end }}{{ if .Paginator }}Paginator: &aws.Paginator{
+					InputToken: "{{ .Paginator.InputToken }}",
+					OutputToken: "{{ .Paginator.OutputToken }}",
+					LimitToken: "{{ .Paginator.LimitKey }}",
+					TruncationToken: "{{ .Paginator.MoreResults }}",
+			},
 			{{ end }}
 		}
 	}

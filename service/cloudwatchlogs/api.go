@@ -163,6 +163,12 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 			Name:       "DescribeLogGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "limit",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -188,6 +194,12 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 			Name:       "DescribeLogStreams",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "limit",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -213,6 +225,12 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 			Name:       "DescribeMetricFilters",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "limit",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -238,6 +256,12 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) (req *aws
 			Name:       "GetLogEvents",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "limit",
+				TruncationToken: "",
+			},
 		}
 	}
 

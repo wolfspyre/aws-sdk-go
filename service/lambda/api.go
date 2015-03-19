@@ -165,6 +165,12 @@ func (c *Lambda) ListEventSourcesRequest(input *ListEventSourcesInput) (req *aws
 			Name:       "ListEventSources",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2014-11-13/event-source-mappings/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "NextMarker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -190,6 +196,12 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *aws.Reque
 			Name:       "ListFunctions",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2014-11-13/functions/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "NextMarker",
+				LimitToken:      "MaxItems",
+				TruncationToken: "",
+			},
 		}
 	}
 

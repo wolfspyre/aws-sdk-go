@@ -290,6 +290,12 @@ func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSche
 			Name:       "DescribeAnalysisSchemes",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -340,6 +346,12 @@ func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *
 			Name:       "DescribeDomains",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -365,6 +377,12 @@ func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput
 			Name:       "DescribeExpressions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -390,6 +408,12 @@ func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput
 			Name:       "DescribeIndexFields",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 
@@ -465,6 +489,12 @@ func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) 
 			Name:       "DescribeSuggesters",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 

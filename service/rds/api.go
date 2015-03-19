@@ -565,6 +565,12 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 			Name:       "DescribeDBEngineVersions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -590,6 +596,12 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *
 			Name:       "DescribeDBInstances",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -615,6 +627,12 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *aw
 			Name:       "DescribeDBLogFiles",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -640,6 +658,12 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 			Name:       "DescribeDBParameterGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -665,6 +689,12 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req
 			Name:       "DescribeDBParameters",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -690,6 +720,12 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 			Name:       "DescribeDBSecurityGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -715,6 +751,12 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *
 			Name:       "DescribeDBSnapshots",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -740,6 +782,12 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 			Name:       "DescribeDBSubnetGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -765,6 +813,12 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 			Name:       "DescribeEngineDefaultParameters",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -815,6 +869,12 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 			Name:       "DescribeEventSubscriptions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -840,6 +900,12 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Reques
 			Name:       "DescribeEvents",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -865,6 +931,12 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 			Name:       "DescribeOptionGroupOptions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -890,6 +962,12 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req
 			Name:       "DescribeOptionGroups",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -915,6 +993,12 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 			Name:       "DescribeOrderableDBInstanceOptions",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -965,6 +1049,12 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 			Name:       "DescribeReservedDBInstances",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -990,6 +1080,12 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 			Name:       "DescribeReservedDBInstancesOfferings",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -1015,6 +1111,12 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 			Name:       "DownloadDBLogFilePortion",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -1040,6 +1142,12 @@ func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *
 			Name:       "ListTagsForResource",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "Marker",
+				OutputToken:     "Marker",
+				LimitToken:      "NumberOfLines",
+				TruncationToken: "AdditionalDataPending",
+			},
 		}
 	}
 
@@ -1825,6 +1933,7 @@ type DBInstance struct {
 	AvailabilityZone                      *string                       `type:"string"`
 	BackupRetentionPeriod                 *int64                        `type:"integer"`
 	CharacterSetName                      *string                       `type:"string"`
+	DBIResourceID                         *string                       `locationName:"DbiResourceId" type:"string"`
 	DBInstanceClass                       *string                       `type:"string"`
 	DBInstanceIdentifier                  *string                       `type:"string"`
 	DBInstanceStatus                      *string                       `type:"string"`
@@ -1832,7 +1941,6 @@ type DBInstance struct {
 	DBParameterGroups                     []*DBParameterGroupStatus     `locationNameList:"DBParameterGroup" type:"list"`
 	DBSecurityGroups                      []*DBSecurityGroupMembership  `locationNameList:"DBSecurityGroup" type:"list"`
 	DBSubnetGroup                         *DBSubnetGroup                `type:"structure"`
-	DBiResourceID                         *string                       `locationName:"DbiResourceId" type:"string"`
 	Endpoint                              *Endpoint                     `type:"structure"`
 	Engine                                *string                       `type:"string"`
 	EngineVersion                         *string                       `type:"string"`

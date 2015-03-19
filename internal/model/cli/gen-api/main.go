@@ -26,6 +26,11 @@ func newGenerateInfo(modelFile, svcPath string, forceService bool) *generateInfo
 	g := &generateInfo{API: &api.API{}, ForceService: forceService}
 	g.API.Attach(modelFile)
 
+	paginatorsFile := strings.Replace(modelFile, ".normal.json", ".paginators.json", -1)
+	if _, err := os.Stat(paginatorsFile); err == nil {
+		g.API.AttachPaginators(paginatorsFile)
+	}
+
 	// ensure the directory exists
 	pkgDir := filepath.Join(svcPath, g.API.PackageName())
 	os.MkdirAll(pkgDir, 0775)

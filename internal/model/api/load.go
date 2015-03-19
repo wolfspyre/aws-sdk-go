@@ -6,17 +6,9 @@ import (
 	"os"
 )
 
-func Load(api, docs, paginators, waiters string) *API {
-	a := API{}
-	a.Attach(api)
-	a.Attach(docs)
-	a.Attach(paginators)
-	a.Attach(waiters)
-	return &a
-}
-
 func (a *API) Attach(filename string) {
 	f, err := os.Open(filename)
+	defer f.Close()
 	if err != nil {
 		panic(err)
 	}

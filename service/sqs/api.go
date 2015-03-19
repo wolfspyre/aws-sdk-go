@@ -263,6 +263,12 @@ func (c *SQS) ListQueuesRequest(input *ListQueuesInput) (req *aws.Request, outpu
 			Name:       "ListQueues",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
+			Paginator: &aws.Paginator{
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
+			},
 		}
 	}
 

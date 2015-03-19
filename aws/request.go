@@ -32,6 +32,14 @@ type Operation struct {
 	Name       string
 	HTTPMethod string
 	HTTPPath   string
+	*Paginator
+}
+
+type Paginator struct {
+	InputToken      string
+	OutputToken     string
+	LimitToken      string
+	TruncationToken string
 }
 
 func NewRequest(service *Service, operation *Operation, params interface{}, data interface{}) *Request {
