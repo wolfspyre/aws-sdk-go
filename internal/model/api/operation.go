@@ -66,6 +66,24 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}(` +
 	return
 }
 
+{{ if .Paginator }}
+func (c *{{ .API.StructName }}) {{ .ExportedName }}Pages(` +
+	`input {{ .InputRef.GoType }}) <- chan {{ .OutputRef.GoType }} {
+	page, _ := c.{{ .ExportedName }}Request(input)
+	ch := make(chan {{ .OutputRef.GoType }})
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.({{ .OutputRef.GoType }})
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+{{ end }}
+
 var op{{ .ExportedName }} *aws.Operation
 `))
 
