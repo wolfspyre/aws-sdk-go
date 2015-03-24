@@ -367,9 +367,9 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListClou
 			HTTPPath:   "/2014-11-06/origin-access-identity/cloudfront",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "StreamingDistributionList.NextMarker",
+				OutputToken:     "CloudFrontOriginAccessIdentityList.NextMarker",
 				LimitToken:      "MaxItems",
-				TruncationToken: "StreamingDistributionList.IsTruncated",
+				TruncationToken: "CloudFrontOriginAccessIdentityList.IsTruncated",
 			},
 		}
 	}
@@ -387,6 +387,21 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentities(input *ListCloudFrontO
 	return
 }
 
+func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPages(input *ListCloudFrontOriginAccessIdentitiesInput) <-chan *ListCloudFrontOriginAccessIdentitiesOutput {
+	page, _ := c.ListCloudFrontOriginAccessIdentitiesRequest(input)
+	ch := make(chan *ListCloudFrontOriginAccessIdentitiesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListCloudFrontOriginAccessIdentitiesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListCloudFrontOriginAccessIdentities *aws.Operation
 
 // ListDistributionsRequest generates a request for the ListDistributions operation.
@@ -398,9 +413,9 @@ func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) (re
 			HTTPPath:   "/2014-11-06/distribution",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "StreamingDistributionList.NextMarker",
+				OutputToken:     "DistributionList.NextMarker",
 				LimitToken:      "MaxItems",
-				TruncationToken: "StreamingDistributionList.IsTruncated",
+				TruncationToken: "DistributionList.IsTruncated",
 			},
 		}
 	}
@@ -418,6 +433,21 @@ func (c *CloudFront) ListDistributions(input *ListDistributionsInput) (output *L
 	return
 }
 
+func (c *CloudFront) ListDistributionsPages(input *ListDistributionsInput) <-chan *ListDistributionsOutput {
+	page, _ := c.ListDistributionsRequest(input)
+	ch := make(chan *ListDistributionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListDistributionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListDistributions *aws.Operation
 
 // ListInvalidationsRequest generates a request for the ListInvalidations operation.
@@ -429,9 +459,9 @@ func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) (re
 			HTTPPath:   "/2014-11-06/distribution/{DistributionId}/invalidation",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "StreamingDistributionList.NextMarker",
+				OutputToken:     "InvalidationList.NextMarker",
 				LimitToken:      "MaxItems",
-				TruncationToken: "StreamingDistributionList.IsTruncated",
+				TruncationToken: "InvalidationList.IsTruncated",
 			},
 		}
 	}
@@ -447,6 +477,21 @@ func (c *CloudFront) ListInvalidations(input *ListInvalidationsInput) (output *L
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *CloudFront) ListInvalidationsPages(input *ListInvalidationsInput) <-chan *ListInvalidationsOutput {
+	page, _ := c.ListInvalidationsRequest(input)
+	ch := make(chan *ListInvalidationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListInvalidationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListInvalidations *aws.Operation
@@ -478,6 +523,21 @@ func (c *CloudFront) ListStreamingDistributions(input *ListStreamingDistribution
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *CloudFront) ListStreamingDistributionsPages(input *ListStreamingDistributionsInput) <-chan *ListStreamingDistributionsOutput {
+	page, _ := c.ListStreamingDistributionsRequest(input)
+	ch := make(chan *ListStreamingDistributionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListStreamingDistributionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListStreamingDistributions *aws.Operation

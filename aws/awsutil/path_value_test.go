@@ -39,6 +39,7 @@ func TestValueAtPathFailure(t *testing.T) {
 	assert.Equal(t, nil, awsutil.ValueAtPath(data, "A[3].C"))
 	assert.Equal(t, nil, awsutil.ValueAtPath(data, "B.B.C.Z"))
 	assert.Equal(t, nil, awsutil.ValueAtPath(data, "a[-1].C"))
+	assert.Equal(t, nil, awsutil.ValueAtPath(nil, "A.B.C"))
 }
 
 func TestSetValueAtPathSuccess(t *testing.T) {

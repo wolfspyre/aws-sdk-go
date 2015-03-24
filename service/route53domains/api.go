@@ -237,6 +237,21 @@ func (c *Route53Domains) ListDomains(input *ListDomainsInput) (output *ListDomai
 	return
 }
 
+func (c *Route53Domains) ListDomainsPages(input *ListDomainsInput) <-chan *ListDomainsOutput {
+	page, _ := c.ListDomainsRequest(input)
+	ch := make(chan *ListDomainsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListDomainsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListDomains *aws.Operation
 
 // ListOperationsRequest generates a request for the ListOperations operation.
@@ -266,6 +281,21 @@ func (c *Route53Domains) ListOperations(input *ListOperationsInput) (output *Lis
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Route53Domains) ListOperationsPages(input *ListOperationsInput) <-chan *ListOperationsOutput {
+	page, _ := c.ListOperationsRequest(input)
+	ch := make(chan *ListOperationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListOperationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListOperations *aws.Operation

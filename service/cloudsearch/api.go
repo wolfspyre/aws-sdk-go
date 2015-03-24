@@ -312,6 +312,21 @@ func (c *CloudSearch) DescribeAnalysisSchemes(input *DescribeAnalysisSchemesInpu
 	return
 }
 
+func (c *CloudSearch) DescribeAnalysisSchemesPages(input *DescribeAnalysisSchemesInput) <-chan *DescribeAnalysisSchemesOutput {
+	page, _ := c.DescribeAnalysisSchemesRequest(input)
+	ch := make(chan *DescribeAnalysisSchemesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeAnalysisSchemesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeAnalysisSchemes *aws.Operation
 
 // DescribeAvailabilityOptionsRequest generates a request for the DescribeAvailabilityOptions operation.
@@ -368,6 +383,21 @@ func (c *CloudSearch) DescribeDomains(input *DescribeDomainsInput) (output *Desc
 	return
 }
 
+func (c *CloudSearch) DescribeDomainsPages(input *DescribeDomainsInput) <-chan *DescribeDomainsOutput {
+	page, _ := c.DescribeDomainsRequest(input)
+	ch := make(chan *DescribeDomainsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDomainsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDomains *aws.Operation
 
 // DescribeExpressionsRequest generates a request for the DescribeExpressions operation.
@@ -399,6 +429,21 @@ func (c *CloudSearch) DescribeExpressions(input *DescribeExpressionsInput) (outp
 	return
 }
 
+func (c *CloudSearch) DescribeExpressionsPages(input *DescribeExpressionsInput) <-chan *DescribeExpressionsOutput {
+	page, _ := c.DescribeExpressionsRequest(input)
+	ch := make(chan *DescribeExpressionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeExpressionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeExpressions *aws.Operation
 
 // DescribeIndexFieldsRequest generates a request for the DescribeIndexFields operation.
@@ -428,6 +473,21 @@ func (c *CloudSearch) DescribeIndexFields(input *DescribeIndexFieldsInput) (outp
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *CloudSearch) DescribeIndexFieldsPages(input *DescribeIndexFieldsInput) <-chan *DescribeIndexFieldsOutput {
+	page, _ := c.DescribeIndexFieldsRequest(input)
+	ch := make(chan *DescribeIndexFieldsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeIndexFieldsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeIndexFields *aws.Operation
@@ -509,6 +569,21 @@ func (c *CloudSearch) DescribeSuggesters(input *DescribeSuggestersInput) (output
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *CloudSearch) DescribeSuggestersPages(input *DescribeSuggestersInput) <-chan *DescribeSuggestersOutput {
+	page, _ := c.DescribeSuggestersRequest(input)
+	ch := make(chan *DescribeSuggestersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeSuggestersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeSuggesters *aws.Operation

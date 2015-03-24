@@ -89,10 +89,10 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Re
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "ExclusiveStartStreamName",
-				OutputToken:     "StreamNames[-1]",
+				InputToken:      "ExclusiveStartShardId",
+				OutputToken:     "StreamDescription.Shards[-1].ShardId",
 				LimitToken:      "Limit",
-				TruncationToken: "HasMoreStreams",
+				TruncationToken: "StreamDescription.HasMoreShards",
 			},
 		}
 	}
@@ -108,6 +108,21 @@ func (c *Kinesis) DescribeStream(input *DescribeStreamInput) (output *DescribeSt
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Kinesis) DescribeStreamPages(input *DescribeStreamInput) <-chan *DescribeStreamOutput {
+	page, _ := c.DescribeStreamRequest(input)
+	ch := make(chan *DescribeStreamOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeStreamOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeStream *aws.Operation
@@ -189,6 +204,21 @@ func (c *Kinesis) ListStreams(input *ListStreamsInput) (output *ListStreamsOutpu
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Kinesis) ListStreamsPages(input *ListStreamsInput) <-chan *ListStreamsOutput {
+	page, _ := c.ListStreamsRequest(input)
+	ch := make(chan *ListStreamsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListStreamsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListStreams *aws.Operation

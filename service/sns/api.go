@@ -335,6 +335,21 @@ func (c *SNS) ListEndpointsByPlatformApplication(input *ListEndpointsByPlatformA
 	return
 }
 
+func (c *SNS) ListEndpointsByPlatformApplicationPages(input *ListEndpointsByPlatformApplicationInput) <-chan *ListEndpointsByPlatformApplicationOutput {
+	page, _ := c.ListEndpointsByPlatformApplicationRequest(input)
+	ch := make(chan *ListEndpointsByPlatformApplicationOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListEndpointsByPlatformApplicationOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListEndpointsByPlatformApplication *aws.Operation
 
 // ListPlatformApplicationsRequest generates a request for the ListPlatformApplications operation.
@@ -364,6 +379,21 @@ func (c *SNS) ListPlatformApplications(input *ListPlatformApplicationsInput) (ou
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *SNS) ListPlatformApplicationsPages(input *ListPlatformApplicationsInput) <-chan *ListPlatformApplicationsOutput {
+	page, _ := c.ListPlatformApplicationsRequest(input)
+	ch := make(chan *ListPlatformApplicationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListPlatformApplicationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListPlatformApplications *aws.Operation
@@ -397,6 +427,21 @@ func (c *SNS) ListSubscriptions(input *ListSubscriptionsInput) (output *ListSubs
 	return
 }
 
+func (c *SNS) ListSubscriptionsPages(input *ListSubscriptionsInput) <-chan *ListSubscriptionsOutput {
+	page, _ := c.ListSubscriptionsRequest(input)
+	ch := make(chan *ListSubscriptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListSubscriptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListSubscriptions *aws.Operation
 
 // ListSubscriptionsByTopicRequest generates a request for the ListSubscriptionsByTopic operation.
@@ -428,6 +473,21 @@ func (c *SNS) ListSubscriptionsByTopic(input *ListSubscriptionsByTopicInput) (ou
 	return
 }
 
+func (c *SNS) ListSubscriptionsByTopicPages(input *ListSubscriptionsByTopicInput) <-chan *ListSubscriptionsByTopicOutput {
+	page, _ := c.ListSubscriptionsByTopicRequest(input)
+	ch := make(chan *ListSubscriptionsByTopicOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListSubscriptionsByTopicOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListSubscriptionsByTopic *aws.Operation
 
 // ListTopicsRequest generates a request for the ListTopics operation.
@@ -457,6 +517,21 @@ func (c *SNS) ListTopics(input *ListTopicsInput) (output *ListTopicsOutput, err 
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *SNS) ListTopicsPages(input *ListTopicsInput) <-chan *ListTopicsOutput {
+	page, _ := c.ListTopicsRequest(input)
+	ch := make(chan *ListTopicsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListTopicsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListTopics *aws.Operation

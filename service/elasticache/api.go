@@ -412,6 +412,21 @@ func (c *ElastiCache) DescribeCacheClusters(input *DescribeCacheClustersInput) (
 	return
 }
 
+func (c *ElastiCache) DescribeCacheClustersPages(input *DescribeCacheClustersInput) <-chan *DescribeCacheClustersOutput {
+	page, _ := c.DescribeCacheClustersRequest(input)
+	ch := make(chan *DescribeCacheClustersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheClustersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeCacheClusters *aws.Operation
 
 // DescribeCacheEngineVersionsRequest generates a request for the DescribeCacheEngineVersions operation.
@@ -441,6 +456,21 @@ func (c *ElastiCache) DescribeCacheEngineVersions(input *DescribeCacheEngineVers
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *ElastiCache) DescribeCacheEngineVersionsPages(input *DescribeCacheEngineVersionsInput) <-chan *DescribeCacheEngineVersionsOutput {
+	page, _ := c.DescribeCacheEngineVersionsRequest(input)
+	ch := make(chan *DescribeCacheEngineVersionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheEngineVersionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeCacheEngineVersions *aws.Operation
@@ -474,6 +504,21 @@ func (c *ElastiCache) DescribeCacheParameterGroups(input *DescribeCacheParameter
 	return
 }
 
+func (c *ElastiCache) DescribeCacheParameterGroupsPages(input *DescribeCacheParameterGroupsInput) <-chan *DescribeCacheParameterGroupsOutput {
+	page, _ := c.DescribeCacheParameterGroupsRequest(input)
+	ch := make(chan *DescribeCacheParameterGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheParameterGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeCacheParameterGroups *aws.Operation
 
 // DescribeCacheParametersRequest generates a request for the DescribeCacheParameters operation.
@@ -503,6 +548,21 @@ func (c *ElastiCache) DescribeCacheParameters(input *DescribeCacheParametersInpu
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *ElastiCache) DescribeCacheParametersPages(input *DescribeCacheParametersInput) <-chan *DescribeCacheParametersOutput {
+	page, _ := c.DescribeCacheParametersRequest(input)
+	ch := make(chan *DescribeCacheParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeCacheParameters *aws.Operation
@@ -536,6 +596,21 @@ func (c *ElastiCache) DescribeCacheSecurityGroups(input *DescribeCacheSecurityGr
 	return
 }
 
+func (c *ElastiCache) DescribeCacheSecurityGroupsPages(input *DescribeCacheSecurityGroupsInput) <-chan *DescribeCacheSecurityGroupsOutput {
+	page, _ := c.DescribeCacheSecurityGroupsRequest(input)
+	ch := make(chan *DescribeCacheSecurityGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheSecurityGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeCacheSecurityGroups *aws.Operation
 
 // DescribeCacheSubnetGroupsRequest generates a request for the DescribeCacheSubnetGroups operation.
@@ -567,6 +642,21 @@ func (c *ElastiCache) DescribeCacheSubnetGroups(input *DescribeCacheSubnetGroups
 	return
 }
 
+func (c *ElastiCache) DescribeCacheSubnetGroupsPages(input *DescribeCacheSubnetGroupsInput) <-chan *DescribeCacheSubnetGroupsOutput {
+	page, _ := c.DescribeCacheSubnetGroupsRequest(input)
+	ch := make(chan *DescribeCacheSubnetGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCacheSubnetGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeCacheSubnetGroups *aws.Operation
 
 // DescribeEngineDefaultParametersRequest generates a request for the DescribeEngineDefaultParameters operation.
@@ -578,7 +668,7 @@ func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngi
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "Marker",
+				OutputToken:     "EngineDefaults.Marker",
 				LimitToken:      "MaxRecords",
 				TruncationToken: "",
 			},
@@ -596,6 +686,21 @@ func (c *ElastiCache) DescribeEngineDefaultParameters(input *DescribeEngineDefau
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *ElastiCache) DescribeEngineDefaultParametersPages(input *DescribeEngineDefaultParametersInput) <-chan *DescribeEngineDefaultParametersOutput {
+	page, _ := c.DescribeEngineDefaultParametersRequest(input)
+	ch := make(chan *DescribeEngineDefaultParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEngineDefaultParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeEngineDefaultParameters *aws.Operation
@@ -629,6 +734,21 @@ func (c *ElastiCache) DescribeEvents(input *DescribeEventsInput) (output *Descri
 	return
 }
 
+func (c *ElastiCache) DescribeEventsPages(input *DescribeEventsInput) <-chan *DescribeEventsOutput {
+	page, _ := c.DescribeEventsRequest(input)
+	ch := make(chan *DescribeEventsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEventsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeEvents *aws.Operation
 
 // DescribeReplicationGroupsRequest generates a request for the DescribeReplicationGroups operation.
@@ -658,6 +778,21 @@ func (c *ElastiCache) DescribeReplicationGroups(input *DescribeReplicationGroups
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *ElastiCache) DescribeReplicationGroupsPages(input *DescribeReplicationGroupsInput) <-chan *DescribeReplicationGroupsOutput {
+	page, _ := c.DescribeReplicationGroupsRequest(input)
+	ch := make(chan *DescribeReplicationGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReplicationGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeReplicationGroups *aws.Operation
@@ -691,6 +826,21 @@ func (c *ElastiCache) DescribeReservedCacheNodes(input *DescribeReservedCacheNod
 	return
 }
 
+func (c *ElastiCache) DescribeReservedCacheNodesPages(input *DescribeReservedCacheNodesInput) <-chan *DescribeReservedCacheNodesOutput {
+	page, _ := c.DescribeReservedCacheNodesRequest(input)
+	ch := make(chan *DescribeReservedCacheNodesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedCacheNodesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeReservedCacheNodes *aws.Operation
 
 // DescribeReservedCacheNodesOfferingsRequest generates a request for the DescribeReservedCacheNodesOfferings operation.
@@ -722,6 +872,21 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferings(input *DescribeReserve
 	return
 }
 
+func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPages(input *DescribeReservedCacheNodesOfferingsInput) <-chan *DescribeReservedCacheNodesOfferingsOutput {
+	page, _ := c.DescribeReservedCacheNodesOfferingsRequest(input)
+	ch := make(chan *DescribeReservedCacheNodesOfferingsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedCacheNodesOfferingsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeReservedCacheNodesOfferings *aws.Operation
 
 // DescribeSnapshotsRequest generates a request for the DescribeSnapshots operation.
@@ -751,6 +916,21 @@ func (c *ElastiCache) DescribeSnapshots(input *DescribeSnapshotsInput) (output *
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *ElastiCache) DescribeSnapshotsPages(input *DescribeSnapshotsInput) <-chan *DescribeSnapshotsOutput {
+	page, _ := c.DescribeSnapshotsRequest(input)
+	ch := make(chan *DescribeSnapshotsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeSnapshotsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeSnapshots *aws.Operation

@@ -360,6 +360,21 @@ func (c *DirectConnect) DescribeConnections(input *DescribeConnectionsInput) (ou
 	return
 }
 
+func (c *DirectConnect) DescribeConnectionsPages(input *DescribeConnectionsInput) <-chan *Connections {
+	page, _ := c.DescribeConnectionsRequest(input)
+	ch := make(chan *Connections)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*Connections)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeConnections *aws.Operation
 
 // DescribeConnectionsOnInterconnectRequest generates a request for the DescribeConnectionsOnInterconnect operation.
@@ -389,6 +404,21 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnect(input *DescribeConnect
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *DirectConnect) DescribeConnectionsOnInterconnectPages(input *DescribeConnectionsOnInterconnectInput) <-chan *Connections {
+	page, _ := c.DescribeConnectionsOnInterconnectRequest(input)
+	ch := make(chan *Connections)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*Connections)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeConnectionsOnInterconnect *aws.Operation
@@ -422,6 +452,21 @@ func (c *DirectConnect) DescribeInterconnects(input *DescribeInterconnectsInput)
 	return
 }
 
+func (c *DirectConnect) DescribeInterconnectsPages(input *DescribeInterconnectsInput) <-chan *DescribeInterconnectsOutput {
+	page, _ := c.DescribeInterconnectsRequest(input)
+	ch := make(chan *DescribeInterconnectsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeInterconnectsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeInterconnects *aws.Operation
 
 // DescribeLocationsRequest generates a request for the DescribeLocations operation.
@@ -451,6 +496,21 @@ func (c *DirectConnect) DescribeLocations(input *DescribeLocationsInput) (output
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *DirectConnect) DescribeLocationsPages(input *DescribeLocationsInput) <-chan *DescribeLocationsOutput {
+	page, _ := c.DescribeLocationsRequest(input)
+	ch := make(chan *DescribeLocationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeLocationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeLocations *aws.Operation
@@ -484,6 +544,21 @@ func (c *DirectConnect) DescribeVirtualGateways(input *DescribeVirtualGatewaysIn
 	return
 }
 
+func (c *DirectConnect) DescribeVirtualGatewaysPages(input *DescribeVirtualGatewaysInput) <-chan *DescribeVirtualGatewaysOutput {
+	page, _ := c.DescribeVirtualGatewaysRequest(input)
+	ch := make(chan *DescribeVirtualGatewaysOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeVirtualGatewaysOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeVirtualGateways *aws.Operation
 
 // DescribeVirtualInterfacesRequest generates a request for the DescribeVirtualInterfaces operation.
@@ -513,6 +588,21 @@ func (c *DirectConnect) DescribeVirtualInterfaces(input *DescribeVirtualInterfac
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *DirectConnect) DescribeVirtualInterfacesPages(input *DescribeVirtualInterfacesInput) <-chan *DescribeVirtualInterfacesOutput {
+	page, _ := c.DescribeVirtualInterfacesRequest(input)
+	ch := make(chan *DescribeVirtualInterfacesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeVirtualInterfacesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeVirtualInterfaces *aws.Operation

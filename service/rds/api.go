@@ -568,8 +568,8 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -587,6 +587,21 @@ func (c *RDS) DescribeDBEngineVersions(input *DescribeDBEngineVersionsInput) (ou
 	return
 }
 
+func (c *RDS) DescribeDBEngineVersionsPages(input *DescribeDBEngineVersionsInput) <-chan *DescribeDBEngineVersionsOutput {
+	page, _ := c.DescribeDBEngineVersionsRequest(input)
+	ch := make(chan *DescribeDBEngineVersionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBEngineVersionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBEngineVersions *aws.Operation
 
 // DescribeDBInstancesRequest generates a request for the DescribeDBInstances operation.
@@ -599,8 +614,8 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -618,6 +633,21 @@ func (c *RDS) DescribeDBInstances(input *DescribeDBInstancesInput) (output *Desc
 	return
 }
 
+func (c *RDS) DescribeDBInstancesPages(input *DescribeDBInstancesInput) <-chan *DescribeDBInstancesOutput {
+	page, _ := c.DescribeDBInstancesRequest(input)
+	ch := make(chan *DescribeDBInstancesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBInstancesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBInstances *aws.Operation
 
 // DescribeDBLogFilesRequest generates a request for the DescribeDBLogFiles operation.
@@ -630,8 +660,8 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *aw
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -649,6 +679,21 @@ func (c *RDS) DescribeDBLogFiles(input *DescribeDBLogFilesInput) (output *Descri
 	return
 }
 
+func (c *RDS) DescribeDBLogFilesPages(input *DescribeDBLogFilesInput) <-chan *DescribeDBLogFilesOutput {
+	page, _ := c.DescribeDBLogFilesRequest(input)
+	ch := make(chan *DescribeDBLogFilesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBLogFilesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBLogFiles *aws.Operation
 
 // DescribeDBParameterGroupsRequest generates a request for the DescribeDBParameterGroups operation.
@@ -661,8 +706,8 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -680,6 +725,21 @@ func (c *RDS) DescribeDBParameterGroups(input *DescribeDBParameterGroupsInput) (
 	return
 }
 
+func (c *RDS) DescribeDBParameterGroupsPages(input *DescribeDBParameterGroupsInput) <-chan *DescribeDBParameterGroupsOutput {
+	page, _ := c.DescribeDBParameterGroupsRequest(input)
+	ch := make(chan *DescribeDBParameterGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBParameterGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBParameterGroups *aws.Operation
 
 // DescribeDBParametersRequest generates a request for the DescribeDBParameters operation.
@@ -692,8 +752,8 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -711,6 +771,21 @@ func (c *RDS) DescribeDBParameters(input *DescribeDBParametersInput) (output *De
 	return
 }
 
+func (c *RDS) DescribeDBParametersPages(input *DescribeDBParametersInput) <-chan *DescribeDBParametersOutput {
+	page, _ := c.DescribeDBParametersRequest(input)
+	ch := make(chan *DescribeDBParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBParameters *aws.Operation
 
 // DescribeDBSecurityGroupsRequest generates a request for the DescribeDBSecurityGroups operation.
@@ -723,8 +798,8 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -742,6 +817,21 @@ func (c *RDS) DescribeDBSecurityGroups(input *DescribeDBSecurityGroupsInput) (ou
 	return
 }
 
+func (c *RDS) DescribeDBSecurityGroupsPages(input *DescribeDBSecurityGroupsInput) <-chan *DescribeDBSecurityGroupsOutput {
+	page, _ := c.DescribeDBSecurityGroupsRequest(input)
+	ch := make(chan *DescribeDBSecurityGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBSecurityGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBSecurityGroups *aws.Operation
 
 // DescribeDBSnapshotsRequest generates a request for the DescribeDBSnapshots operation.
@@ -754,8 +844,8 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -773,6 +863,21 @@ func (c *RDS) DescribeDBSnapshots(input *DescribeDBSnapshotsInput) (output *Desc
 	return
 }
 
+func (c *RDS) DescribeDBSnapshotsPages(input *DescribeDBSnapshotsInput) <-chan *DescribeDBSnapshotsOutput {
+	page, _ := c.DescribeDBSnapshotsRequest(input)
+	ch := make(chan *DescribeDBSnapshotsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBSnapshotsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBSnapshots *aws.Operation
 
 // DescribeDBSubnetGroupsRequest generates a request for the DescribeDBSubnetGroups operation.
@@ -785,8 +890,8 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -804,6 +909,21 @@ func (c *RDS) DescribeDBSubnetGroups(input *DescribeDBSubnetGroupsInput) (output
 	return
 }
 
+func (c *RDS) DescribeDBSubnetGroupsPages(input *DescribeDBSubnetGroupsInput) <-chan *DescribeDBSubnetGroupsOutput {
+	page, _ := c.DescribeDBSubnetGroupsRequest(input)
+	ch := make(chan *DescribeDBSubnetGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDBSubnetGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeDBSubnetGroups *aws.Operation
 
 // DescribeEngineDefaultParametersRequest generates a request for the DescribeEngineDefaultParameters operation.
@@ -815,9 +935,9 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				OutputToken:     "EngineDefaults.Marker",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -833,6 +953,21 @@ func (c *RDS) DescribeEngineDefaultParameters(input *DescribeEngineDefaultParame
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *RDS) DescribeEngineDefaultParametersPages(input *DescribeEngineDefaultParametersInput) <-chan *DescribeEngineDefaultParametersOutput {
+	page, _ := c.DescribeEngineDefaultParametersRequest(input)
+	ch := make(chan *DescribeEngineDefaultParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEngineDefaultParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeEngineDefaultParameters *aws.Operation
@@ -872,8 +1007,8 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -891,6 +1026,21 @@ func (c *RDS) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput)
 	return
 }
 
+func (c *RDS) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput) <-chan *DescribeEventSubscriptionsOutput {
+	page, _ := c.DescribeEventSubscriptionsRequest(input)
+	ch := make(chan *DescribeEventSubscriptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEventSubscriptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeEventSubscriptions *aws.Operation
 
 // DescribeEventsRequest generates a request for the DescribeEvents operation.
@@ -903,8 +1053,8 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Reques
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -922,6 +1072,21 @@ func (c *RDS) DescribeEvents(input *DescribeEventsInput) (output *DescribeEvents
 	return
 }
 
+func (c *RDS) DescribeEventsPages(input *DescribeEventsInput) <-chan *DescribeEventsOutput {
+	page, _ := c.DescribeEventsRequest(input)
+	ch := make(chan *DescribeEventsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEventsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeEvents *aws.Operation
 
 // DescribeOptionGroupOptionsRequest generates a request for the DescribeOptionGroupOptions operation.
@@ -934,8 +1099,8 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -953,6 +1118,21 @@ func (c *RDS) DescribeOptionGroupOptions(input *DescribeOptionGroupOptionsInput)
 	return
 }
 
+func (c *RDS) DescribeOptionGroupOptionsPages(input *DescribeOptionGroupOptionsInput) <-chan *DescribeOptionGroupOptionsOutput {
+	page, _ := c.DescribeOptionGroupOptionsRequest(input)
+	ch := make(chan *DescribeOptionGroupOptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeOptionGroupOptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeOptionGroupOptions *aws.Operation
 
 // DescribeOptionGroupsRequest generates a request for the DescribeOptionGroups operation.
@@ -965,8 +1145,8 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -984,6 +1164,21 @@ func (c *RDS) DescribeOptionGroups(input *DescribeOptionGroupsInput) (output *De
 	return
 }
 
+func (c *RDS) DescribeOptionGroupsPages(input *DescribeOptionGroupsInput) <-chan *DescribeOptionGroupsOutput {
+	page, _ := c.DescribeOptionGroupsRequest(input)
+	ch := make(chan *DescribeOptionGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeOptionGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeOptionGroups *aws.Operation
 
 // DescribeOrderableDBInstanceOptionsRequest generates a request for the DescribeOrderableDBInstanceOptions operation.
@@ -996,8 +1191,8 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -1013,6 +1208,21 @@ func (c *RDS) DescribeOrderableDBInstanceOptions(input *DescribeOrderableDBInsta
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *RDS) DescribeOrderableDBInstanceOptionsPages(input *DescribeOrderableDBInstanceOptionsInput) <-chan *DescribeOrderableDBInstanceOptionsOutput {
+	page, _ := c.DescribeOrderableDBInstanceOptionsRequest(input)
+	ch := make(chan *DescribeOrderableDBInstanceOptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeOrderableDBInstanceOptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeOrderableDBInstanceOptions *aws.Operation
@@ -1052,8 +1262,8 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -1071,6 +1281,21 @@ func (c *RDS) DescribeReservedDBInstances(input *DescribeReservedDBInstancesInpu
 	return
 }
 
+func (c *RDS) DescribeReservedDBInstancesPages(input *DescribeReservedDBInstancesInput) <-chan *DescribeReservedDBInstancesOutput {
+	page, _ := c.DescribeReservedDBInstancesRequest(input)
+	ch := make(chan *DescribeReservedDBInstancesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedDBInstancesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeReservedDBInstances *aws.Operation
 
 // DescribeReservedDBInstancesOfferingsRequest generates a request for the DescribeReservedDBInstancesOfferings operation.
@@ -1083,8 +1308,8 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
 				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				LimitToken:      "MaxRecords",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -1100,6 +1325,21 @@ func (c *RDS) DescribeReservedDBInstancesOfferings(input *DescribeReservedDBInst
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *RDS) DescribeReservedDBInstancesOfferingsPages(input *DescribeReservedDBInstancesOfferingsInput) <-chan *DescribeReservedDBInstancesOfferingsOutput {
+	page, _ := c.DescribeReservedDBInstancesOfferingsRequest(input)
+	ch := make(chan *DescribeReservedDBInstancesOfferingsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedDBInstancesOfferingsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeReservedDBInstancesOfferings *aws.Operation
@@ -1133,6 +1373,21 @@ func (c *RDS) DownloadDBLogFilePortion(input *DownloadDBLogFilePortionInput) (ou
 	return
 }
 
+func (c *RDS) DownloadDBLogFilePortionPages(input *DownloadDBLogFilePortionInput) <-chan *DownloadDBLogFilePortionOutput {
+	page, _ := c.DownloadDBLogFilePortionRequest(input)
+	ch := make(chan *DownloadDBLogFilePortionOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DownloadDBLogFilePortionOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDownloadDBLogFilePortion *aws.Operation
 
 // ListTagsForResourceRequest generates a request for the ListTagsForResource operation.
@@ -1143,10 +1398,10 @@ func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "Marker",
-				OutputToken:     "Marker",
-				LimitToken:      "NumberOfLines",
-				TruncationToken: "AdditionalDataPending",
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -1162,6 +1417,21 @@ func (c *RDS) ListTagsForResource(input *ListTagsForResourceInput) (output *List
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *RDS) ListTagsForResourcePages(input *ListTagsForResourceInput) <-chan *ListTagsForResourceOutput {
+	page, _ := c.ListTagsForResourceRequest(input)
+	ch := make(chan *ListTagsForResourceOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListTagsForResourceOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListTagsForResource *aws.Operation
@@ -1933,7 +2203,6 @@ type DBInstance struct {
 	AvailabilityZone                      *string                       `type:"string"`
 	BackupRetentionPeriod                 *int64                        `type:"integer"`
 	CharacterSetName                      *string                       `type:"string"`
-	DBIResourceID                         *string                       `locationName:"DbiResourceId" type:"string"`
 	DBInstanceClass                       *string                       `type:"string"`
 	DBInstanceIdentifier                  *string                       `type:"string"`
 	DBInstanceStatus                      *string                       `type:"string"`
@@ -1941,6 +2210,7 @@ type DBInstance struct {
 	DBParameterGroups                     []*DBParameterGroupStatus     `locationNameList:"DBParameterGroup" type:"list"`
 	DBSecurityGroups                      []*DBSecurityGroupMembership  `locationNameList:"DBSecurityGroup" type:"list"`
 	DBSubnetGroup                         *DBSubnetGroup                `type:"structure"`
+	DBiResourceID                         *string                       `locationName:"DbiResourceId" type:"string"`
 	Endpoint                              *Endpoint                     `type:"structure"`
 	Engine                                *string                       `type:"string"`
 	EngineVersion                         *string                       `type:"string"`

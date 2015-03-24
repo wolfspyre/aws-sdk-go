@@ -187,6 +187,21 @@ func (c *Lambda) ListEventSources(input *ListEventSourcesInput) (output *ListEve
 	return
 }
 
+func (c *Lambda) ListEventSourcesPages(input *ListEventSourcesInput) <-chan *ListEventSourcesOutput {
+	page, _ := c.ListEventSourcesRequest(input)
+	ch := make(chan *ListEventSourcesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListEventSourcesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListEventSources *aws.Operation
 
 // ListFunctionsRequest generates a request for the ListFunctions operation.
@@ -216,6 +231,21 @@ func (c *Lambda) ListFunctions(input *ListFunctionsInput) (output *ListFunctions
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Lambda) ListFunctionsPages(input *ListFunctionsInput) <-chan *ListFunctionsOutput {
+	page, _ := c.ListFunctionsRequest(input)
+	ch := make(chan *ListFunctionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListFunctionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListFunctions *aws.Operation

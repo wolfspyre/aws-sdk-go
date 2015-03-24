@@ -114,9 +114,9 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) (req *aws.Requ
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "maxResults",
 				TruncationToken: "",
 			},
 		}
@@ -135,6 +135,21 @@ func (c *Support) DescribeCases(input *DescribeCasesInput) (output *DescribeCase
 	return
 }
 
+func (c *Support) DescribeCasesPages(input *DescribeCasesInput) <-chan *DescribeCasesOutput {
+	page, _ := c.DescribeCasesRequest(input)
+	ch := make(chan *DescribeCasesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCasesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeCases *aws.Operation
 
 // DescribeCommunicationsRequest generates a request for the DescribeCommunications operation.
@@ -145,9 +160,9 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
+				InputToken:      "nextToken",
+				OutputToken:     "nextToken",
+				LimitToken:      "maxResults",
 				TruncationToken: "",
 			},
 		}
@@ -164,6 +179,21 @@ func (c *Support) DescribeCommunications(input *DescribeCommunicationsInput) (ou
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput) <-chan *DescribeCommunicationsOutput {
+	page, _ := c.DescribeCommunicationsRequest(input)
+	ch := make(chan *DescribeCommunicationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeCommunicationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeCommunications *aws.Operation
@@ -195,6 +225,21 @@ func (c *Support) DescribeServices(input *DescribeServicesInput) (output *Descri
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Support) DescribeServicesPages(input *DescribeServicesInput) <-chan *DescribeServicesOutput {
+	page, _ := c.DescribeServicesRequest(input)
+	ch := make(chan *DescribeServicesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeServicesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeServices *aws.Operation
@@ -253,6 +298,21 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatuses(input *DescribeTrus
 	return
 }
 
+func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesPages(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) <-chan *DescribeTrustedAdvisorCheckRefreshStatusesOutput {
+	page, _ := c.DescribeTrustedAdvisorCheckRefreshStatusesRequest(input)
+	ch := make(chan *DescribeTrustedAdvisorCheckRefreshStatusesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeTrustedAdvisorCheckRefreshStatusesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeTrustedAdvisorCheckRefreshStatuses *aws.Operation
 
 // DescribeTrustedAdvisorCheckResultRequest generates a request for the DescribeTrustedAdvisorCheckResult operation.
@@ -307,6 +367,21 @@ func (c *Support) DescribeTrustedAdvisorCheckSummaries(input *DescribeTrustedAdv
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Support) DescribeTrustedAdvisorCheckSummariesPages(input *DescribeTrustedAdvisorCheckSummariesInput) <-chan *DescribeTrustedAdvisorCheckSummariesOutput {
+	page, _ := c.DescribeTrustedAdvisorCheckSummariesRequest(input)
+	ch := make(chan *DescribeTrustedAdvisorCheckSummariesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeTrustedAdvisorCheckSummariesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeTrustedAdvisorCheckSummaries *aws.Operation

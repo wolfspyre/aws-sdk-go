@@ -562,6 +562,21 @@ func (c *Redshift) DescribeClusterParameterGroups(input *DescribeClusterParamete
 	return
 }
 
+func (c *Redshift) DescribeClusterParameterGroupsPages(input *DescribeClusterParameterGroupsInput) <-chan *DescribeClusterParameterGroupsOutput {
+	page, _ := c.DescribeClusterParameterGroupsRequest(input)
+	ch := make(chan *DescribeClusterParameterGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterParameterGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeClusterParameterGroups *aws.Operation
 
 // DescribeClusterParametersRequest generates a request for the DescribeClusterParameters operation.
@@ -591,6 +606,21 @@ func (c *Redshift) DescribeClusterParameters(input *DescribeClusterParametersInp
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeClusterParametersPages(input *DescribeClusterParametersInput) <-chan *DescribeClusterParametersOutput {
+	page, _ := c.DescribeClusterParametersRequest(input)
+	ch := make(chan *DescribeClusterParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeClusterParameters *aws.Operation
@@ -624,6 +654,21 @@ func (c *Redshift) DescribeClusterSecurityGroups(input *DescribeClusterSecurityG
 	return
 }
 
+func (c *Redshift) DescribeClusterSecurityGroupsPages(input *DescribeClusterSecurityGroupsInput) <-chan *DescribeClusterSecurityGroupsOutput {
+	page, _ := c.DescribeClusterSecurityGroupsRequest(input)
+	ch := make(chan *DescribeClusterSecurityGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterSecurityGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeClusterSecurityGroups *aws.Operation
 
 // DescribeClusterSnapshotsRequest generates a request for the DescribeClusterSnapshots operation.
@@ -653,6 +698,21 @@ func (c *Redshift) DescribeClusterSnapshots(input *DescribeClusterSnapshotsInput
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeClusterSnapshotsPages(input *DescribeClusterSnapshotsInput) <-chan *DescribeClusterSnapshotsOutput {
+	page, _ := c.DescribeClusterSnapshotsRequest(input)
+	ch := make(chan *DescribeClusterSnapshotsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterSnapshotsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeClusterSnapshots *aws.Operation
@@ -686,6 +746,21 @@ func (c *Redshift) DescribeClusterSubnetGroups(input *DescribeClusterSubnetGroup
 	return
 }
 
+func (c *Redshift) DescribeClusterSubnetGroupsPages(input *DescribeClusterSubnetGroupsInput) <-chan *DescribeClusterSubnetGroupsOutput {
+	page, _ := c.DescribeClusterSubnetGroupsRequest(input)
+	ch := make(chan *DescribeClusterSubnetGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterSubnetGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeClusterSubnetGroups *aws.Operation
 
 // DescribeClusterVersionsRequest generates a request for the DescribeClusterVersions operation.
@@ -715,6 +790,21 @@ func (c *Redshift) DescribeClusterVersions(input *DescribeClusterVersionsInput) 
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeClusterVersionsPages(input *DescribeClusterVersionsInput) <-chan *DescribeClusterVersionsOutput {
+	page, _ := c.DescribeClusterVersionsRequest(input)
+	ch := make(chan *DescribeClusterVersionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClusterVersionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeClusterVersions *aws.Operation
@@ -748,6 +838,21 @@ func (c *Redshift) DescribeClusters(input *DescribeClustersInput) (output *Descr
 	return
 }
 
+func (c *Redshift) DescribeClustersPages(input *DescribeClustersInput) <-chan *DescribeClustersOutput {
+	page, _ := c.DescribeClustersRequest(input)
+	ch := make(chan *DescribeClustersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeClustersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeClusters *aws.Operation
 
 // DescribeDefaultClusterParametersRequest generates a request for the DescribeDefaultClusterParameters operation.
@@ -759,7 +864,7 @@ func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaul
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
 				InputToken:      "Marker",
-				OutputToken:     "Marker",
+				OutputToken:     "DefaultClusterParameters.Marker",
 				LimitToken:      "MaxRecords",
 				TruncationToken: "",
 			},
@@ -777,6 +882,21 @@ func (c *Redshift) DescribeDefaultClusterParameters(input *DescribeDefaultCluste
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeDefaultClusterParametersPages(input *DescribeDefaultClusterParametersInput) <-chan *DescribeDefaultClusterParametersOutput {
+	page, _ := c.DescribeDefaultClusterParametersRequest(input)
+	ch := make(chan *DescribeDefaultClusterParametersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeDefaultClusterParametersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeDefaultClusterParameters *aws.Operation
@@ -835,6 +955,21 @@ func (c *Redshift) DescribeEventSubscriptions(input *DescribeEventSubscriptionsI
 	return
 }
 
+func (c *Redshift) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput) <-chan *DescribeEventSubscriptionsOutput {
+	page, _ := c.DescribeEventSubscriptionsRequest(input)
+	ch := make(chan *DescribeEventSubscriptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEventSubscriptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeEventSubscriptions *aws.Operation
 
 // DescribeEventsRequest generates a request for the DescribeEvents operation.
@@ -864,6 +999,21 @@ func (c *Redshift) DescribeEvents(input *DescribeEventsInput) (output *DescribeE
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeEventsPages(input *DescribeEventsInput) <-chan *DescribeEventsOutput {
+	page, _ := c.DescribeEventsRequest(input)
+	ch := make(chan *DescribeEventsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeEventsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeEvents *aws.Operation
@@ -897,6 +1047,21 @@ func (c *Redshift) DescribeHSMClientCertificates(input *DescribeHSMClientCertifi
 	return
 }
 
+func (c *Redshift) DescribeHSMClientCertificatesPages(input *DescribeHSMClientCertificatesInput) <-chan *DescribeHSMClientCertificatesOutput {
+	page, _ := c.DescribeHSMClientCertificatesRequest(input)
+	ch := make(chan *DescribeHSMClientCertificatesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeHSMClientCertificatesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeHSMClientCertificates *aws.Operation
 
 // DescribeHSMConfigurationsRequest generates a request for the DescribeHSMConfigurations operation.
@@ -926,6 +1091,21 @@ func (c *Redshift) DescribeHSMConfigurations(input *DescribeHSMConfigurationsInp
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeHSMConfigurationsPages(input *DescribeHSMConfigurationsInput) <-chan *DescribeHSMConfigurationsOutput {
+	page, _ := c.DescribeHSMConfigurationsRequest(input)
+	ch := make(chan *DescribeHSMConfigurationsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeHSMConfigurationsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeHSMConfigurations *aws.Operation
@@ -984,6 +1164,21 @@ func (c *Redshift) DescribeOrderableClusterOptions(input *DescribeOrderableClust
 	return
 }
 
+func (c *Redshift) DescribeOrderableClusterOptionsPages(input *DescribeOrderableClusterOptionsInput) <-chan *DescribeOrderableClusterOptionsOutput {
+	page, _ := c.DescribeOrderableClusterOptionsRequest(input)
+	ch := make(chan *DescribeOrderableClusterOptionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeOrderableClusterOptionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeOrderableClusterOptions *aws.Operation
 
 // DescribeReservedNodeOfferingsRequest generates a request for the DescribeReservedNodeOfferings operation.
@@ -1015,6 +1210,21 @@ func (c *Redshift) DescribeReservedNodeOfferings(input *DescribeReservedNodeOffe
 	return
 }
 
+func (c *Redshift) DescribeReservedNodeOfferingsPages(input *DescribeReservedNodeOfferingsInput) <-chan *DescribeReservedNodeOfferingsOutput {
+	page, _ := c.DescribeReservedNodeOfferingsRequest(input)
+	ch := make(chan *DescribeReservedNodeOfferingsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedNodeOfferingsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opDescribeReservedNodeOfferings *aws.Operation
 
 // DescribeReservedNodesRequest generates a request for the DescribeReservedNodes operation.
@@ -1044,6 +1254,21 @@ func (c *Redshift) DescribeReservedNodes(input *DescribeReservedNodesInput) (out
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *Redshift) DescribeReservedNodesPages(input *DescribeReservedNodesInput) <-chan *DescribeReservedNodesOutput {
+	page, _ := c.DescribeReservedNodesRequest(input)
+	ch := make(chan *DescribeReservedNodesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeReservedNodesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeReservedNodes *aws.Operation

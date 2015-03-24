@@ -1212,6 +1212,21 @@ func (c *IAM) GetGroup(input *GetGroupInput) (output *GetGroupOutput, err error)
 	return
 }
 
+func (c *IAM) GetGroupPages(input *GetGroupInput) <-chan *GetGroupOutput {
+	page, _ := c.GetGroupRequest(input)
+	ch := make(chan *GetGroupOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*GetGroupOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opGetGroup *aws.Operation
 
 // GetGroupPolicyRequest generates a request for the GetGroupPolicy operation.
@@ -1543,6 +1558,21 @@ func (c *IAM) ListAccessKeys(input *ListAccessKeysInput) (output *ListAccessKeys
 	return
 }
 
+func (c *IAM) ListAccessKeysPages(input *ListAccessKeysInput) <-chan *ListAccessKeysOutput {
+	page, _ := c.ListAccessKeysRequest(input)
+	ch := make(chan *ListAccessKeysOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListAccessKeysOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListAccessKeys *aws.Operation
 
 // ListAccountAliasesRequest generates a request for the ListAccountAliases operation.
@@ -1572,6 +1602,21 @@ func (c *IAM) ListAccountAliases(input *ListAccountAliasesInput) (output *ListAc
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListAccountAliasesPages(input *ListAccountAliasesInput) <-chan *ListAccountAliasesOutput {
+	page, _ := c.ListAccountAliasesRequest(input)
+	ch := make(chan *ListAccountAliasesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListAccountAliasesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListAccountAliases *aws.Operation
@@ -1705,6 +1750,21 @@ func (c *IAM) ListGroupPolicies(input *ListGroupPoliciesInput) (output *ListGrou
 	return
 }
 
+func (c *IAM) ListGroupPoliciesPages(input *ListGroupPoliciesInput) <-chan *ListGroupPoliciesOutput {
+	page, _ := c.ListGroupPoliciesRequest(input)
+	ch := make(chan *ListGroupPoliciesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListGroupPoliciesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListGroupPolicies *aws.Operation
 
 // ListGroupsRequest generates a request for the ListGroups operation.
@@ -1734,6 +1794,21 @@ func (c *IAM) ListGroups(input *ListGroupsInput) (output *ListGroupsOutput, err 
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListGroupsPages(input *ListGroupsInput) <-chan *ListGroupsOutput {
+	page, _ := c.ListGroupsRequest(input)
+	ch := make(chan *ListGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListGroups *aws.Operation
@@ -1767,6 +1842,21 @@ func (c *IAM) ListGroupsForUser(input *ListGroupsForUserInput) (output *ListGrou
 	return
 }
 
+func (c *IAM) ListGroupsForUserPages(input *ListGroupsForUserInput) <-chan *ListGroupsForUserOutput {
+	page, _ := c.ListGroupsForUserRequest(input)
+	ch := make(chan *ListGroupsForUserOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListGroupsForUserOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListGroupsForUser *aws.Operation
 
 // ListInstanceProfilesRequest generates a request for the ListInstanceProfiles operation.
@@ -1796,6 +1886,21 @@ func (c *IAM) ListInstanceProfiles(input *ListInstanceProfilesInput) (output *Li
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListInstanceProfilesPages(input *ListInstanceProfilesInput) <-chan *ListInstanceProfilesOutput {
+	page, _ := c.ListInstanceProfilesRequest(input)
+	ch := make(chan *ListInstanceProfilesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListInstanceProfilesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListInstanceProfiles *aws.Operation
@@ -1829,6 +1934,21 @@ func (c *IAM) ListInstanceProfilesForRole(input *ListInstanceProfilesForRoleInpu
 	return
 }
 
+func (c *IAM) ListInstanceProfilesForRolePages(input *ListInstanceProfilesForRoleInput) <-chan *ListInstanceProfilesForRoleOutput {
+	page, _ := c.ListInstanceProfilesForRoleRequest(input)
+	ch := make(chan *ListInstanceProfilesForRoleOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListInstanceProfilesForRoleOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListInstanceProfilesForRole *aws.Operation
 
 // ListMFADevicesRequest generates a request for the ListMFADevices operation.
@@ -1858,6 +1978,21 @@ func (c *IAM) ListMFADevices(input *ListMFADevicesInput) (output *ListMFADevices
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListMFADevicesPages(input *ListMFADevicesInput) <-chan *ListMFADevicesOutput {
+	page, _ := c.ListMFADevicesRequest(input)
+	ch := make(chan *ListMFADevicesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListMFADevicesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListMFADevices *aws.Operation
@@ -1966,6 +2101,21 @@ func (c *IAM) ListRolePolicies(input *ListRolePoliciesInput) (output *ListRolePo
 	return
 }
 
+func (c *IAM) ListRolePoliciesPages(input *ListRolePoliciesInput) <-chan *ListRolePoliciesOutput {
+	page, _ := c.ListRolePoliciesRequest(input)
+	ch := make(chan *ListRolePoliciesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListRolePoliciesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListRolePolicies *aws.Operation
 
 // ListRolesRequest generates a request for the ListRoles operation.
@@ -1997,6 +2147,21 @@ func (c *IAM) ListRoles(input *ListRolesInput) (output *ListRolesOutput, err err
 	return
 }
 
+func (c *IAM) ListRolesPages(input *ListRolesInput) <-chan *ListRolesOutput {
+	page, _ := c.ListRolesRequest(input)
+	ch := make(chan *ListRolesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListRolesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListRoles *aws.Operation
 
 // ListSAMLProvidersRequest generates a request for the ListSAMLProviders operation.
@@ -2007,10 +2172,10 @@ func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) (req *aws.
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "Marker",
-				OutputToken:     "Marker",
-				LimitToken:      "MaxItems",
-				TruncationToken: "IsTruncated",
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
+				TruncationToken: "",
 			},
 		}
 	}
@@ -2026,6 +2191,21 @@ func (c *IAM) ListSAMLProviders(input *ListSAMLProvidersInput) (output *ListSAML
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListSAMLProvidersPages(input *ListSAMLProvidersInput) <-chan *ListSAMLProvidersOutput {
+	page, _ := c.ListSAMLProvidersRequest(input)
+	ch := make(chan *ListSAMLProvidersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListSAMLProvidersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListSAMLProviders *aws.Operation
@@ -2059,6 +2239,21 @@ func (c *IAM) ListServerCertificates(input *ListServerCertificatesInput) (output
 	return
 }
 
+func (c *IAM) ListServerCertificatesPages(input *ListServerCertificatesInput) <-chan *ListServerCertificatesOutput {
+	page, _ := c.ListServerCertificatesRequest(input)
+	ch := make(chan *ListServerCertificatesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListServerCertificatesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListServerCertificates *aws.Operation
 
 // ListSigningCertificatesRequest generates a request for the ListSigningCertificates operation.
@@ -2088,6 +2283,21 @@ func (c *IAM) ListSigningCertificates(input *ListSigningCertificatesInput) (outp
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListSigningCertificatesPages(input *ListSigningCertificatesInput) <-chan *ListSigningCertificatesOutput {
+	page, _ := c.ListSigningCertificatesRequest(input)
+	ch := make(chan *ListSigningCertificatesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListSigningCertificatesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListSigningCertificates *aws.Operation
@@ -2121,6 +2331,21 @@ func (c *IAM) ListUserPolicies(input *ListUserPoliciesInput) (output *ListUserPo
 	return
 }
 
+func (c *IAM) ListUserPoliciesPages(input *ListUserPoliciesInput) <-chan *ListUserPoliciesOutput {
+	page, _ := c.ListUserPoliciesRequest(input)
+	ch := make(chan *ListUserPoliciesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListUserPoliciesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListUserPolicies *aws.Operation
 
 // ListUsersRequest generates a request for the ListUsers operation.
@@ -2152,6 +2377,21 @@ func (c *IAM) ListUsers(input *ListUsersInput) (output *ListUsersOutput, err err
 	return
 }
 
+func (c *IAM) ListUsersPages(input *ListUsersInput) <-chan *ListUsersOutput {
+	page, _ := c.ListUsersRequest(input)
+	ch := make(chan *ListUsersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListUsersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListUsers *aws.Operation
 
 // ListVirtualMFADevicesRequest generates a request for the ListVirtualMFADevices operation.
@@ -2181,6 +2421,21 @@ func (c *IAM) ListVirtualMFADevices(input *ListVirtualMFADevicesInput) (output *
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *IAM) ListVirtualMFADevicesPages(input *ListVirtualMFADevicesInput) <-chan *ListVirtualMFADevicesOutput {
+	page, _ := c.ListVirtualMFADevicesRequest(input)
+	ch := make(chan *ListVirtualMFADevicesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListVirtualMFADevicesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListVirtualMFADevices *aws.Operation

@@ -212,6 +212,21 @@ func (c *SES) ListIdentities(input *ListIdentitiesInput) (output *ListIdentities
 	return
 }
 
+func (c *SES) ListIdentitiesPages(input *ListIdentitiesInput) <-chan *ListIdentitiesOutput {
+	page, _ := c.ListIdentitiesRequest(input)
+	ch := make(chan *ListIdentitiesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListIdentitiesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListIdentities *aws.Operation
 
 // ListVerifiedEmailAddressesRequest generates a request for the ListVerifiedEmailAddresses operation.
@@ -222,9 +237,9 @@ func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddresse
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "NextToken",
-				OutputToken:     "NextToken",
-				LimitToken:      "MaxItems",
+				InputToken:      "",
+				OutputToken:     "",
+				LimitToken:      "",
 				TruncationToken: "",
 			},
 		}
@@ -241,6 +256,21 @@ func (c *SES) ListVerifiedEmailAddresses(input *ListVerifiedEmailAddressesInput)
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *SES) ListVerifiedEmailAddressesPages(input *ListVerifiedEmailAddressesInput) <-chan *ListVerifiedEmailAddressesOutput {
+	page, _ := c.ListVerifiedEmailAddressesRequest(input)
+	ch := make(chan *ListVerifiedEmailAddressesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListVerifiedEmailAddressesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListVerifiedEmailAddresses *aws.Operation

@@ -116,8 +116,8 @@ func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *aws.Re
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
 			Paginator: &aws.Paginator{
-				InputToken:      "Marker",
-				OutputToken:     "Marker",
+				InputToken:      "",
+				OutputToken:     "",
 				LimitToken:      "",
 				TruncationToken: "",
 			},
@@ -135,6 +135,21 @@ func (c *EMR) DescribeJobFlows(input *DescribeJobFlowsInput) (output *DescribeJo
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *EMR) DescribeJobFlowsPages(input *DescribeJobFlowsInput) <-chan *DescribeJobFlowsOutput {
+	page, _ := c.DescribeJobFlowsRequest(input)
+	ch := make(chan *DescribeJobFlowsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*DescribeJobFlowsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opDescribeJobFlows *aws.Operation
@@ -193,6 +208,21 @@ func (c *EMR) ListBootstrapActions(input *ListBootstrapActionsInput) (output *Li
 	return
 }
 
+func (c *EMR) ListBootstrapActionsPages(input *ListBootstrapActionsInput) <-chan *ListBootstrapActionsOutput {
+	page, _ := c.ListBootstrapActionsRequest(input)
+	ch := make(chan *ListBootstrapActionsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListBootstrapActionsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListBootstrapActions *aws.Operation
 
 // ListClustersRequest generates a request for the ListClusters operation.
@@ -222,6 +252,21 @@ func (c *EMR) ListClusters(input *ListClustersInput) (output *ListClustersOutput
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *EMR) ListClustersPages(input *ListClustersInput) <-chan *ListClustersOutput {
+	page, _ := c.ListClustersRequest(input)
+	ch := make(chan *ListClustersOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListClustersOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListClusters *aws.Operation
@@ -255,6 +300,21 @@ func (c *EMR) ListInstanceGroups(input *ListInstanceGroupsInput) (output *ListIn
 	return
 }
 
+func (c *EMR) ListInstanceGroupsPages(input *ListInstanceGroupsInput) <-chan *ListInstanceGroupsOutput {
+	page, _ := c.ListInstanceGroupsRequest(input)
+	ch := make(chan *ListInstanceGroupsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListInstanceGroupsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListInstanceGroups *aws.Operation
 
 // ListInstancesRequest generates a request for the ListInstances operation.
@@ -286,6 +346,21 @@ func (c *EMR) ListInstances(input *ListInstancesInput) (output *ListInstancesOut
 	return
 }
 
+func (c *EMR) ListInstancesPages(input *ListInstancesInput) <-chan *ListInstancesOutput {
+	page, _ := c.ListInstancesRequest(input)
+	ch := make(chan *ListInstancesOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListInstancesOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 var opListInstances *aws.Operation
 
 // ListStepsRequest generates a request for the ListSteps operation.
@@ -315,6 +390,21 @@ func (c *EMR) ListSteps(input *ListStepsInput) (output *ListStepsOutput, err err
 	output = out
 	err = req.Send()
 	return
+}
+
+func (c *EMR) ListStepsPages(input *ListStepsInput) <-chan *ListStepsOutput {
+	page, _ := c.ListStepsRequest(input)
+	ch := make(chan *ListStepsOutput)
+	go func() {
+		for page != nil {
+			page.Send()
+			out := page.Data.(*ListStepsOutput)
+			ch <- out
+			page = page.NextPage()
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 var opListSteps *aws.Operation
