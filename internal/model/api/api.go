@@ -15,6 +15,7 @@ type API struct {
 	Metadata   Metadata
 	Operations map[string]*Operation
 	Shapes     map[string]*Shape
+	Waiters    []Waiter
 
 	// Disables inflection checks. Only use this when generating tests
 	NoInflections bool
