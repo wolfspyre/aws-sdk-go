@@ -18,7 +18,7 @@ func (c *SES) WaitUntilIdentityExists(input *GetIdentityVerificationAttributesIn
 					State:    "success",
 					Matcher:  "pathAll",
 					Argument: "VerificationAttributes.*.VerificationStatus",
-					Expected: Success,
+					Expected: "Success",
 				},
 				
 			},

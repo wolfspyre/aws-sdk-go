@@ -18,7 +18,7 @@ func (c *CloudFront) WaitUntilDistributionDeployed(input *GetDistributionInput) 
 					State:    "success",
 					Matcher:  "path",
 					Argument: "Distribution.Status",
-					Expected: Deployed,
+					Expected: "Deployed",
 				},
 				
 			},
@@ -46,7 +46,7 @@ func (c *CloudFront) WaitUntilInvalidationCompleted(input *GetInvalidationInput)
 					State:    "success",
 					Matcher:  "path",
 					Argument: "Invalidation.Status",
-					Expected: Completed,
+					Expected: "Completed",
 				},
 				
 			},
@@ -74,7 +74,7 @@ func (c *CloudFront) WaitUntilStreamingDistributionDeployed(input *GetStreamingD
 					State:    "success",
 					Matcher:  "path",
 					Argument: "StreamingDistribution.Status",
-					Expected: Deployed,
+					Expected: "Deployed",
 				},
 				
 			},

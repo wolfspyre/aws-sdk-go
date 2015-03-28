@@ -18,7 +18,7 @@ func (c *Kinesis) WaitUntilStreamExists(input *DescribeStreamInput) error {
 					State:    "success",
 					Matcher:  "path",
 					Argument: "StreamDescription.StreamStatus",
-					Expected: ACTIVE,
+					Expected: "ACTIVE",
 				},
 				
 			},
