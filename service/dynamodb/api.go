@@ -16,12 +16,6 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) (req *aws.Reque
 			Name:       "BatchGetItem",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
-			Paginator: &aws.Paginator{
-				InputToken:      "RequestItems",
-				OutputToken:     "UnprocessedKeys",
-				LimitToken:      "",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -82,21 +76,6 @@ func (c *DynamoDB) BatchGetItem(input *BatchGetItemInput) (output *BatchGetItemO
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *DynamoDB) BatchGetItemPages(input *BatchGetItemInput) <-chan *BatchGetItemOutput {
-	page, _ := c.BatchGetItemRequest(input)
-	ch := make(chan *BatchGetItemOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*BatchGetItemOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opBatchGetItem *aws.Operation
@@ -411,19 +390,16 @@ func (c *DynamoDB) ListTables(input *ListTablesInput) (output *ListTablesOutput,
 	return
 }
 
-func (c *DynamoDB) ListTablesPages(input *ListTablesInput) <-chan *ListTablesOutput {
+func (c *DynamoDB) ListTablesPages(input *ListTablesInput, fn func(*ListTablesOutput, error) bool) {
 	page, _ := c.ListTablesRequest(input)
-	ch := make(chan *ListTablesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListTablesOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListTablesOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListTables *aws.Operation
@@ -529,19 +505,16 @@ func (c *DynamoDB) Query(input *QueryInput) (output *QueryOutput, err error) {
 	return
 }
 
-func (c *DynamoDB) QueryPages(input *QueryInput) <-chan *QueryOutput {
+func (c *DynamoDB) QueryPages(input *QueryInput, fn func(*QueryOutput, error) bool) {
 	page, _ := c.QueryRequest(input)
-	ch := make(chan *QueryOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*QueryOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*QueryOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opQuery *aws.Operation
@@ -592,19 +565,16 @@ func (c *DynamoDB) Scan(input *ScanInput) (output *ScanOutput, err error) {
 	return
 }
 
-func (c *DynamoDB) ScanPages(input *ScanInput) <-chan *ScanOutput {
+func (c *DynamoDB) ScanPages(input *ScanInput, fn func(*ScanOutput, error) bool) {
 	page, _ := c.ScanRequest(input)
-	ch := make(chan *ScanOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ScanOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ScanOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opScan *aws.Operation

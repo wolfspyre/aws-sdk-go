@@ -71,12 +71,6 @@ func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *aws
 			Name:       "DescribeTrails",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
-			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -93,21 +87,6 @@ func (c *CloudTrail) DescribeTrails(input *DescribeTrailsInput) (output *Describ
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *CloudTrail) DescribeTrailsPages(input *DescribeTrailsInput) <-chan *DescribeTrailsOutput {
-	page, _ := c.DescribeTrailsRequest(input)
-	ch := make(chan *DescribeTrailsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeTrailsOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opDescribeTrails *aws.Operation

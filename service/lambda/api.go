@@ -209,12 +209,6 @@ func (c *Lambda) ListEventSourcesRequest(input *ListEventSourcesInput) (req *aws
 			Name:       "ListEventSources",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2014-11-13/event-source-mappings/",
-			Paginator: &aws.Paginator{
-				InputToken:      "Marker",
-				OutputToken:     "NextMarker",
-				LimitToken:      "MaxItems",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -239,21 +233,6 @@ func (c *Lambda) ListEventSources(input *ListEventSourcesInput) (output *ListEve
 	return
 }
 
-func (c *Lambda) ListEventSourcesPages(input *ListEventSourcesInput) <-chan *ListEventSourcesOutput {
-	page, _ := c.ListEventSourcesRequest(input)
-	ch := make(chan *ListEventSourcesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListEventSourcesOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
-}
-
 var opListEventSources *aws.Operation
 
 // ListFunctionsRequest generates a request for the ListFunctions operation.
@@ -263,12 +242,6 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *aws.Reque
 			Name:       "ListFunctions",
 			HTTPMethod: "GET",
 			HTTPPath:   "/2014-11-13/functions/",
-			Paginator: &aws.Paginator{
-				InputToken:      "Marker",
-				OutputToken:     "NextMarker",
-				LimitToken:      "MaxItems",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -288,21 +261,6 @@ func (c *Lambda) ListFunctions(input *ListFunctionsInput) (output *ListFunctions
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *Lambda) ListFunctionsPages(input *ListFunctionsInput) <-chan *ListFunctionsOutput {
-	page, _ := c.ListFunctionsRequest(input)
-	ch := make(chan *ListFunctionsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListFunctionsOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opListFunctions *aws.Operation

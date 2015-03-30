@@ -401,19 +401,16 @@ func (c *SNS) ListEndpointsByPlatformApplication(input *ListEndpointsByPlatformA
 	return
 }
 
-func (c *SNS) ListEndpointsByPlatformApplicationPages(input *ListEndpointsByPlatformApplicationInput) <-chan *ListEndpointsByPlatformApplicationOutput {
+func (c *SNS) ListEndpointsByPlatformApplicationPages(input *ListEndpointsByPlatformApplicationInput, fn func(*ListEndpointsByPlatformApplicationOutput, error) bool) {
 	page, _ := c.ListEndpointsByPlatformApplicationRequest(input)
-	ch := make(chan *ListEndpointsByPlatformApplicationOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListEndpointsByPlatformApplicationOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListEndpointsByPlatformApplicationOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListEndpointsByPlatformApplication *aws.Operation
@@ -455,19 +452,16 @@ func (c *SNS) ListPlatformApplications(input *ListPlatformApplicationsInput) (ou
 	return
 }
 
-func (c *SNS) ListPlatformApplicationsPages(input *ListPlatformApplicationsInput) <-chan *ListPlatformApplicationsOutput {
+func (c *SNS) ListPlatformApplicationsPages(input *ListPlatformApplicationsInput, fn func(*ListPlatformApplicationsOutput, error) bool) {
 	page, _ := c.ListPlatformApplicationsRequest(input)
-	ch := make(chan *ListPlatformApplicationsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListPlatformApplicationsOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListPlatformApplicationsOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListPlatformApplications *aws.Operation
@@ -505,19 +499,16 @@ func (c *SNS) ListSubscriptions(input *ListSubscriptionsInput) (output *ListSubs
 	return
 }
 
-func (c *SNS) ListSubscriptionsPages(input *ListSubscriptionsInput) <-chan *ListSubscriptionsOutput {
+func (c *SNS) ListSubscriptionsPages(input *ListSubscriptionsInput, fn func(*ListSubscriptionsOutput, error) bool) {
 	page, _ := c.ListSubscriptionsRequest(input)
-	ch := make(chan *ListSubscriptionsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListSubscriptionsOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListSubscriptionsOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListSubscriptions *aws.Operation
@@ -555,19 +546,16 @@ func (c *SNS) ListSubscriptionsByTopic(input *ListSubscriptionsByTopicInput) (ou
 	return
 }
 
-func (c *SNS) ListSubscriptionsByTopicPages(input *ListSubscriptionsByTopicInput) <-chan *ListSubscriptionsByTopicOutput {
+func (c *SNS) ListSubscriptionsByTopicPages(input *ListSubscriptionsByTopicInput, fn func(*ListSubscriptionsByTopicOutput, error) bool) {
 	page, _ := c.ListSubscriptionsByTopicRequest(input)
-	ch := make(chan *ListSubscriptionsByTopicOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListSubscriptionsByTopicOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListSubscriptionsByTopicOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListSubscriptionsByTopic *aws.Operation
@@ -604,19 +592,16 @@ func (c *SNS) ListTopics(input *ListTopicsInput) (output *ListTopicsOutput, err 
 	return
 }
 
-func (c *SNS) ListTopicsPages(input *ListTopicsInput) <-chan *ListTopicsOutput {
+func (c *SNS) ListTopicsPages(input *ListTopicsInput, fn func(*ListTopicsOutput, error) bool) {
 	page, _ := c.ListTopicsRequest(input)
-	ch := make(chan *ListTopicsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*ListTopicsOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*ListTopicsOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opListTopics *aws.Operation

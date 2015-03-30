@@ -202,19 +202,16 @@ func (c *Support) DescribeCases(input *DescribeCasesInput) (output *DescribeCase
 	return
 }
 
-func (c *Support) DescribeCasesPages(input *DescribeCasesInput) <-chan *DescribeCasesOutput {
+func (c *Support) DescribeCasesPages(input *DescribeCasesInput, fn func(*DescribeCasesOutput, error) bool) {
 	page, _ := c.DescribeCasesRequest(input)
-	ch := make(chan *DescribeCasesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeCasesOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*DescribeCasesOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opDescribeCases *aws.Operation
@@ -258,19 +255,16 @@ func (c *Support) DescribeCommunications(input *DescribeCommunicationsInput) (ou
 	return
 }
 
-func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput) <-chan *DescribeCommunicationsOutput {
+func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, error) bool) {
 	page, _ := c.DescribeCommunicationsRequest(input)
-	ch := make(chan *DescribeCommunicationsOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeCommunicationsOutput)
-			ch <- out
-			page = page.NextPage()
+	for ; page != nil; page = page.NextPage() {
+		page.Send()
+		out := page.Data.(*DescribeCommunicationsOutput)
+		if result := fn(out, page.Error); page.Error != nil || !result {
+			return
 		}
-		close(ch)
-	}()
-	return ch
+	}
+	fn(nil, nil)
 }
 
 var opDescribeCommunications *aws.Operation
@@ -282,12 +276,6 @@ func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) (req *aw
 			Name:       "DescribeServices",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
-			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -313,21 +301,6 @@ func (c *Support) DescribeServices(input *DescribeServicesInput) (output *Descri
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *Support) DescribeServicesPages(input *DescribeServicesInput) <-chan *DescribeServicesOutput {
-	page, _ := c.DescribeServicesRequest(input)
-	ch := make(chan *DescribeServicesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeServicesOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opDescribeServices *aws.Operation
@@ -367,12 +340,6 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descr
 			Name:       "DescribeTrustedAdvisorCheckRefreshStatuses",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
-			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -389,21 +356,6 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatuses(input *DescribeTrus
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesPages(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) <-chan *DescribeTrustedAdvisorCheckRefreshStatusesOutput {
-	page, _ := c.DescribeTrustedAdvisorCheckRefreshStatusesRequest(input)
-	ch := make(chan *DescribeTrustedAdvisorCheckRefreshStatusesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeTrustedAdvisorCheckRefreshStatusesOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opDescribeTrustedAdvisorCheckRefreshStatuses *aws.Operation
@@ -452,12 +404,6 @@ func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTru
 			Name:       "DescribeTrustedAdvisorCheckSummaries",
 			HTTPMethod: "POST",
 			HTTPPath:   "/",
-			Paginator: &aws.Paginator{
-				InputToken:      "",
-				OutputToken:     "",
-				LimitToken:      "",
-				TruncationToken: "",
-			},
 		}
 	}
 
@@ -476,21 +422,6 @@ func (c *Support) DescribeTrustedAdvisorCheckSummaries(input *DescribeTrustedAdv
 	output = out
 	err = req.Send()
 	return
-}
-
-func (c *Support) DescribeTrustedAdvisorCheckSummariesPages(input *DescribeTrustedAdvisorCheckSummariesInput) <-chan *DescribeTrustedAdvisorCheckSummariesOutput {
-	page, _ := c.DescribeTrustedAdvisorCheckSummariesRequest(input)
-	ch := make(chan *DescribeTrustedAdvisorCheckSummariesOutput)
-	go func() {
-		for page != nil {
-			page.Send()
-			out := page.Data.(*DescribeTrustedAdvisorCheckSummariesOutput)
-			ch <- out
-			page = page.NextPage()
-		}
-		close(ch)
-	}()
-	return ch
 }
 
 var opDescribeTrustedAdvisorCheckSummaries *aws.Operation
