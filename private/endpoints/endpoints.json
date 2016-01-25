@@ -1,6 +1,25 @@
 {
   "version": 2,
   "endpoints": {
+    "eucalyptus/*": {
+      "endpoint": "{service}.mantle.wolfspyre.io"
+    },
+    "eucalyptus/ec2metadata": {
+      "endpoint": "http://169.254.169.254/latest",
+      "signingRegion": "eucalyptus"
+    },
+    "eucalyptus/iam": {
+      "endpoint": "iam.mantle.wolfspyre.io",
+      "signingRegion": "eucalyptus"
+    },
+    "eucalyptus/s3": {
+      "endpoint": "objectstorage.mantle.wolfspyre.io",
+      "signingRegion": "eucalyptus"
+    },
+		"eucalyptus/sts": {
+			"endpoint":      "sts.euca_subdomain.mydomain.com",
+			"signingRegion": "eucalyptus"
+		},
     "*/*": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },

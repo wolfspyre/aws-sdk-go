@@ -75,6 +75,25 @@ var endpointsMap = endpointStruct{
 		"eu-west-1/s3": {
 			Endpoint: "s3-{region}.amazonaws.com",
 		},
+		"eucalyptus/*": {
+			Endpoint: "{service}.mantle.wolfspyre.io",
+		},
+		"eucalyptus/ec2metadata": {
+			Endpoint:      "http://169.254.169.254/latest",
+			SigningRegion: "eucalyptus",
+		},
+		"eucalyptus/iam": {
+			Endpoint:      "iam.mantle.wolfspyre.io",
+			SigningRegion: "eucalyptus",
+		},
+		"eucalyptus/s3": {
+			Endpoint:      "objectstorage.mantle.wolfspyre.io",
+			SigningRegion: "eucalyptus",
+		},
+		"eucalyptus/sts": {
+			Endpoint:      "sts.euca_subdomain.mydomain.com",
+			SigningRegion: "eucalyptus",
+		},
 		"sa-east-1/s3": {
 			Endpoint: "s3-{region}.amazonaws.com",
 		},
