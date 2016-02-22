@@ -17,7 +17,7 @@
       "signingRegion": "eucalyptus"
     },
 		"eucalyptus/sts": {
-			"endpoint":      "sts.euca_subdomain.mydomain.com",
+			"endpoint":      "sts.mantle.wolfspyre.io",
 			"signingRegion": "eucalyptus"
 		},
     "*/*": {
